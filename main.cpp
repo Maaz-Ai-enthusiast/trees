@@ -102,18 +102,26 @@ void postorder(node* root) {
     cout << root-> data << " ";
 
 }
-
 void buildFromLevelOrder(node* &root) {
     queue<node*> q;
 
-    cout << "Enter data for root" << endl;
-    int data ;
+    cout << "Enter data for root: ";
+    int data;
     cin >> data;
+
+    // Check if the root should not be created
+    if (data == -1) {
+        root = NULL; // No tree is created
+        cout << "Tree is empty!" << endl;
+        return;
+    }
+
+    // Create the root node
     root = new node(data);
-    
     q.push(root);
 
-    while(!q.empty()) {
+    // Process the rest of the input to construct the tree
+    while (!q.empty()) {
         node* temp = q.front();
         q.pop();
 
@@ -121,8 +129,8 @@ void buildFromLevelOrder(node* &root) {
         int leftData;
         cin >> leftData;
 
-        if(leftData != -1) {
-            temp -> left = new node(leftData);
+        if (leftData != -1) { // Check if left child exists
+            temp->left = new node(leftData);
             q.push(temp->left);
         }
 
@@ -130,12 +138,13 @@ void buildFromLevelOrder(node* &root) {
         int rightData;
         cin >> rightData;
 
-        if(rightData != -1) {
-            temp -> right = new node(rightData);
+        if (rightData != -1) { // Check if right child exists
+            temp->right = new node(rightData);
             q.push(temp->right);
         }
     }
- }
+}
+
 
 
 int main() {
